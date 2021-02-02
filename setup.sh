@@ -46,6 +46,5 @@ else
 fi
 
 
-#echo "Building value-inference without testing"
-# in Azure Pipelines, this line cannot execute successfully
-#(cd $JSR308/value-inference && ./gradlew build -x test --console=plain)
+echo "Building value-inference without testing"
+(cd $JSR308/value-inference && ./gradlew build -x test --console=plain)
