@@ -44,7 +44,3 @@ else
     BRANCH=master
     (cd $JSR308 && git clone -b $BRANCH --depth 1 https://github.com/"$REPO_SITE"/do-like-javac.git)
 fi
-
-
-echo "Building value-inference without testing"
-(cd $JSR308/value-inference && ./gradlew build -x test --console=plain)
