@@ -48,14 +48,12 @@ public class ValueChecker extends BaseInferrableChecker {
             BaseAnnotatedTypeFactory realTypeFactory,
             SlotManager slotManager,
             ConstraintManager constraintManager) {
-        ValueInferenceAnnotatedTypeFactory securityInferenceATF =
-                new ValueInferenceAnnotatedTypeFactory(
-                        inferenceChecker,
-                        realChecker.withCombineConstraints(),
-                        realTypeFactory,
-                        realChecker,
-                        slotManager,
-                        constraintManager);
-        return securityInferenceATF;
+        return new ValueInferenceAnnotatedTypeFactory(
+                inferenceChecker,
+                realChecker.withCombineConstraints(),
+                realTypeFactory,
+                realChecker,
+                slotManager,
+                constraintManager);
     }
 }

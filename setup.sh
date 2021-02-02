@@ -8,16 +8,28 @@ export JSR308=$(cd $(dirname "$0")/.. && pwd)
 
 # export SHELLOPTS
 
-#default value is opprop. REPO_SITE may be set to other value for travis test purpose.
-export REPO_SITE="${REPO_SITE:-opprop}"
+# default value is txiang61. REPO_SITE may be set to other value for travis test purpose.
+export REPO_SITE="${REPO_SITE:-txiang61}"
 
-echo "------ Downloading everthing from REPO_SITE: $REPO_SITE ------"
+echo "------ Downloading everything from REPO_SITE: $REPO_SITE ------"
 
-##### build checker-framework-inference
+# build checker-framework=
+if [ -d $JSR308/checker-framework ] ; then
+    (cd $JSR308/checker-framework && git pull)
+else
+    BRANCH=master
+    echo "Downloading checker-framework from: https://github.com/$REPO_SITE/checker-framework.git"
+    (cd $JSR308 && git clone -b $BRANCH --depth 1 https://github.com/"$REPO_SITE"/checker-framework.git)
+fi
+
+(cd $JSR308/checker-framework && ./checker/bin-devel/build.sh)
+
+# build checker-framework-inference
 if [ -d $JSR308/checker-framework-inference ] ; then
     (cd $JSR308/checker-framework-inference && git pull)
 else
     BRANCH=master
+    echo "Downloading checker-framework-inference from: https://github.com/$REPO_SITE/checker-framework-inference.git"
     (cd $JSR308 && git clone -b $BRANCH --depth 1 https://github.com/"$REPO_SITE"/checker-framework-inference.git)
 fi
 
@@ -34,6 +46,6 @@ else
 fi
 
 
-echo "Building cast checker without testing"
-
-(cd $JSR308/value-inference && ./gradlew build -x test --console=plain)
+#echo "Building value-inference without testing"
+# in Azure Pipelines, this line cannot execute successfully
+#(cd $JSR308/value-inference && ./gradlew build -x test --console=plain)
