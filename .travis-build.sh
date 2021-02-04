@@ -19,4 +19,6 @@ echo "Starting value-inference tests"
 
 # Currently we only run basic tests in value-inference.
 # TODO run with corpus
-./gradlew test
+./gradlew clean assemble
+
+./gradlew build
