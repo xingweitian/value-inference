@@ -29,4 +29,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           . ./setup.sh
+          ./gradlew clean assemble
           ./gradlew build
